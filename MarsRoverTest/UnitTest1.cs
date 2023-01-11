@@ -10,11 +10,45 @@ namespace MarsRoverTest
         }
 
         [Test]
-        public void Test1()
+        public void positionEastTurningleftShouldBeNorth()
         {
-            var map = "\U0001f7e9\U0001f7e9🌳\U0001f7e9\U0001f7e9\r\n\U0001f7e9\U0001f7e9\U0001f7e9\U0001f7e9\U0001f7e9\r\n\U0001f7e9\U0001f7e9\U0001f7e9🌳\U0001f7e9\r\n\U0001f7e9🌳\U0001f7e9\U0001f7e9\U0001f7e9\r\n➡️\U0001f7e9\U0001f7e9\U0001f7e9\U0001f7e9"
-            Class1.simulateRover();
-            Assert.Pass();
+            var map = new char[,] {
+                { '.', '.', '#', '.', '.' },
+                { '.', '.', '.', '.', '.' },
+                { '.', '.', '.', '#', '.' },
+                { '.', '#', '.', '.', '.' },
+                { '>', '.', '.', '.', '.' }};
+            
+            var rover = new Class1(0, 4, 'E', map);
+            rover.simulateRover('L');
+            Assert.AreEqual(0, rover.X);
+            Assert.AreEqual(4, rover.Y);
+            Assert.AreEqual('N', rover.Direction);
+            //Class1.simulateRover(map, directions );
         }
+        [Test]
+        public void TestWhenTurningToObstacle()
+        {
+            var map = new char[,] {
+                { '.', '.', '#', '.', '.' },
+                { '.', '.', '.', '.', '.' },
+                { '.', '.', '.', '#', '.' },
+                { '.', '#', '.', '.', '.' },
+                { '>', '.', '.', '.', '.' }};
+
+            var rover = new Class1(0, 4, 'S', map);
+            rover.simulateRover('U');
+            Assert.AreEqual(0, rover.X);
+            Assert.AreEqual(4, rover.Y);
+            Assert.AreEqual('S', rover.Direction);
+            //Class1.simulateRover(map, directions );
+        }
+
+
+
+
+
     }
+
+
 }
