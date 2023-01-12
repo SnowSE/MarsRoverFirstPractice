@@ -19,8 +19,19 @@ namespace MarsRoverFirstPractice
             var direction = mapArray[0];
             var position = new Point(0, 0);
             
-            var directionCommandsArray = directionCommands.Split(" ");
+            int gridSize = (int)Math.Sqrt(mapArray.Length);
 
+            for (int i = 1; i < mapArray.Length; i++)
+            {
+                if (mapArray[i] == "X")
+                {
+                    
+                    position.X = (i - 1) % gridSize;
+                    position.Y = (i - 1) / gridSize;
+                }
+            }
+
+            var directionCommandsArray = directionCommands.Split(" ");
             foreach (var directionCommand in directionCommandsArray)
             {
                 

@@ -20,12 +20,28 @@ namespace MarsRoverTest
         //}
 
         [Test]
-        public void RoverMoveOne()
+        public void RoverMoveOneForward()
         {
-            var map = "➡️ 0";
+            var map = "➡️ 0 0 0";
             var directionCommands = "F";
             var result = MarsRover.simulateRover(map, directionCommands);
+            Assert.That(result.Item1.X == 1);
+            Assert.That(result.Item1.Y == 0);
+            Assert.That(result.Item2 == "➡️");
         }
+
+        [Test]
+        public void RoverMoveOneBlocked()
+        {
+            var map = "➡️ X 0 0";
+            var directionCommands = "F";
+            var result = MarsRover.simulateRover(map, directionCommands);
+            Assert.That(result.Item1.X == 0);
+            Assert.That(result.Item1.Y == 0);
+            Assert.That(result.Item2 == "➡️");
+
+        }
+
     }
 
 }
