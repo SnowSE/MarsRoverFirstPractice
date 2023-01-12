@@ -1,4 +1,5 @@
 ﻿using MarsRoverFirstPractice;
+using System.Drawing;
 
 namespace MarsRoverTest
 {
@@ -9,12 +10,22 @@ namespace MarsRoverTest
         {
         }
 
+        //[Test]
+        //public void DirectionEmtpy()
+        //{
+        //    var map = "";
+        //    var directionCommands = "";
+        //    var exception = Assert.Throws<Exception>(() => MarsRover.simulateRover(map, directionCommands));
+        //    Assert.That("Direction commands are empty" == exception.Message);
+        //}
+
         [Test]
-        public void Test1()
+        public void RoverMoveOne()
         {
-            var map = "\U0001f7e9\U0001f7e9🌳\U0001f7e9\U0001f7e9\r\n\U0001f7e9\U0001f7e9\U0001f7e9\U0001f7e9\U0001f7e9\r\n\U0001f7e9\U0001f7e9\U0001f7e9🌳\U0001f7e9\r\n\U0001f7e9🌳\U0001f7e9\U0001f7e9\U0001f7e9\r\n➡️\U0001f7e9\U0001f7e9\U0001f7e9\U0001f7e9"
-            Class1.simulateRover();
-            Assert.Pass();
+            var map = "➡️ 0";
+            var directionCommands = "F";
+            var result = MarsRover.simulateRover(map, directionCommands);
         }
     }
+
 }
