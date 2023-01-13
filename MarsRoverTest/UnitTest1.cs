@@ -31,11 +31,19 @@ namespace MarsRoverTest
             Assert.AreEqual(3, rover.y);
         }
         [Test]
-        public void RoverShouldMove()
+        public void RoverShouldMoveNoObsticales()
         {
             MarsRover rover = new MarsRover("1 2 N");
             rover.Move("LFLFLFLFF");
             Assert.AreEqual("1 3 N", rover.x + " " + rover.y + " " + rover.direction);
+        }
+        [Test]
+        public void RoverShouldntMoveOneObsticale()
+        {
+            MarsRover rover = new MarsRover("0 0 N");
+            rover.Obsticale("0 1");
+            rover.Move("F");
+            Assert.AreEqual("0 0 N", rover.x + " " + rover.y + " " + rover.direction);
         }
     }
 }

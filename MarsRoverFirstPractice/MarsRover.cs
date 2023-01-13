@@ -7,6 +7,7 @@ namespace MarsRoverFirstPractice
         public int x;
         public int y;
         public string direction;
+        public int obsticaleX, obsticaleY;
         public MarsRover(string location)
         {
             int.TryParse(location.Split(" ")[0], out x);
@@ -73,6 +74,13 @@ namespace MarsRoverFirstPractice
                     throw new ArgumentException();
             }
         }
+
+        public void Obsticale(string obsticaleLocation)
+        {
+            
+            int.TryParse(obsticaleLocation.Split(" ")[0], out obsticaleX);
+            int.TryParse(obsticaleLocation.Split(" ")[1], out obsticaleY);
+        }
         public void Move(string moveRoverCommands)
         {
             char[] instructions = moveRoverCommands.ToCharArray();
@@ -88,8 +96,17 @@ namespace MarsRoverFirstPractice
                         RotateRight();
                         break;
                     case 'F':
-                        MoveForward();
-                        break;
+                        if (x + 1 == obsticaleX || x - 1 == obsticaleX || y + 1 == obsticaleY || y - 1 == obsticaleY)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            MoveForward();
+                            break;
+                        }
+                        /*MoveForward();
+                        break;*/
                     default:
                         throw new ArgumentException();
                 }
