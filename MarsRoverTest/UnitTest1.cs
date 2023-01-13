@@ -1,4 +1,5 @@
 ﻿using MarsRoverFirstPractice;
+using System.Drawing;
 
 namespace MarsRoverTest
 {
@@ -10,11 +11,56 @@ namespace MarsRoverTest
         }
 
         [Test]
-        public void Test1()
+        public void navigateAcrossMap()
         {
-            var map = "\U0001f7e9\U0001f7e9🌳\U0001f7e9\U0001f7e9\r\n\U0001f7e9\U0001f7e9\U0001f7e9\U0001f7e9\U0001f7e9\r\n\U0001f7e9\U0001f7e9\U0001f7e9🌳\U0001f7e9\r\n\U0001f7e9🌳\U0001f7e9\U0001f7e9\U0001f7e9\r\n➡️\U0001f7e9\U0001f7e9\U0001f7e9\U0001f7e9"
-            Class1.simulateRover();
-            Assert.Pass();
+            //var map = "🟩🟩🌳🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🌳🟩🟩🌳🟩🟩🟩➡️🟩🟩🟩🟩";
+            var map = "OOXOOOOOOOOOOXOOXOOOEOOOO";
+            var moveCommands = "FFLFFFRFFLF";
+            var result = Class1.simulateRover(map, moveCommands);
+
+            var expectedDestination = new Point(0, 4);
+            var expectedDirection = 'N';
+            Assert.That(expectedDestination.X, Is.EqualTo(result.Item1.X));
+            Assert.That(expectedDestination.Y, Is.EqualTo(result.Item1.Y));
+            Assert.That(expectedDirection, Is.EqualTo(result.Item2));
+        }
+
+        [Test]
+        public void ranIntoWall()
+        {
+            var map = "OOXOOOOOOOOOOXOOXOOOEOOOO";
+            var moveCommands = "LLFFFFFFFFFF";
+            var result = Class1.simulateRover(map, moveCommands);
+            var expectedDestination = new Point(4, 0);
+            var expectedDirection = 'W';
+            Assert.That(expectedDestination.X, Is.EqualTo(result.Item1.X));
+            Assert.That(expectedDestination.Y, Is.EqualTo(result.Item1.Y));
+            Assert.That(expectedDirection, Is.EqualTo(result.Item2));
+        }
+
+        [Test]
+        public void ranIntoObstacle()
+        {
+            var map = "OOXOOOOOOOOOOXOOXOOOEOOOO";
+            var moveCommands = "FFFLFFFF";
+            var result = Class1.simulateRover(map, moveCommands);
+            var expectedDestination = new Point(3, 3);
+            var expectedDirection = 'N';
+            Assert.That(expectedDestination.X, Is.EqualTo(result.Item1.X));
+            Assert.That(expectedDestination.Y, Is.EqualTo(result.Item1.Y));
+            Assert.That(expectedDirection, Is.EqualTo(result.Item2));
+        }
+        [Test]
+        public void ranIntoObstacleAndWall()
+        {
+            var map = "OOXOOOOOOOOOOXOOXOOOEOOOO";
+            var moveCommands = "FLFFRFFRFFLLFFRF";
+            var result = Class1.simulateRover(map, moveCommands);
+            var expectedDestination = new Point(3, 4);
+            var expectedDirection = 'E';
+            Assert.That(expectedDestination.X, Is.EqualTo(result.Item1.X));
+            Assert.That(expectedDestination.Y, Is.EqualTo(result.Item1.Y));
+            Assert.That(expectedDirection, Is.EqualTo(result.Item2));
         }
     }
 }
